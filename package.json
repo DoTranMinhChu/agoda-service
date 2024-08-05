@@ -1,0 +1,37 @@
+{
+  "name": "agoda-service",
+  "version": "1.0.1",
+  "description": "",
+  "scripts": {
+    "rmdir": "node -e \"var fs = require('fs');process.argv.slice(1).map((fpath)=>{ try {fs.rmdirSync(fpath,{recursive: true})} catch(e){console.warn('Error folder:', fpath, e)}});process.exit(0);\"",
+    "build": "npm run rmdir -- dist && tsc",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DoTranMinhChu/agoda-service"
+  },
+  "keywords": [
+    "GAT"
+  ],
+  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "module": "./dist/esm/index.js",
+  "author": "dotranminhchu",
+  "license": "ISC",
+  "private": false,
+  "homepage": "https://github.com/DoTranMinhChu/agoda-service",
+  "dependencies": {
+    "@types/node": "^12.20.55",
+    "axios": "^0.21.4"
+  },
+  "devDependencies": {
+    "@types/node": "^12.20.55",
+    "ts-node": "^8.10.2",
+    "typescript": "^5.2.2"
+  }
+}
