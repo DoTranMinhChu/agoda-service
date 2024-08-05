@@ -14,7 +14,7 @@ export class AgodaHotelService {
     this.#_apiKey = tequilaServiceConfig.apiKey;
     this.#_baseURL = tequilaServiceConfig.baseUrl;
     this.#_axiosInstance = axiosInstance(this.#_baseURL, {
-      headers: { Apikey: this.#_apiKey },
+      headers: { "x-rapidapi-key": this.#_apiKey },
     });
   }
 
@@ -35,7 +35,7 @@ export class AgodaHotelService {
   ): Promise<ISearchHotelResponse> {
     return (
       await this.#_axiosInstance.get<ISearchHotelResponse>(
-        "v2/booking/save_booking",
+        "hotels/search-overnight",
         {
           params: this.parseParamSearchOvernight(params),
         }
@@ -46,11 +46,14 @@ export class AgodaHotelService {
     const params: { [key: string]: Array<number> | string | number | Date } =
       {};
     for (const [key, value] of Object.entries(_params)) {
-      if (value instanceof Date)
-        params[key] = value.toISOString().split("T")[0];
+      params[key] = value as any;
+      if (["checkinDate", "checkoutDate"].includes(key))
+        params[key] = new Date(value?.toString()).toISOString().split("T")[0];
       if (Array.isArray(value)) params[key] = value.join(",");
       if (key == "sort")
         params.sort = [_params.sort.by, _params.sort.type].join(",");
+      if (key == "prices")
+        params.price = [_params.prices.from, _params.prices.to].join(",");
     }
 
     return params;
