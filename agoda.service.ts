@@ -9,7 +9,7 @@ export class AgodaService {
     this._tequilaServiceConfig = tequilaServiceConfig;
   }
 
-  get location() {
+  get hotel() {
     return new AgodaHotelService(this._tequilaServiceConfig);
   }
 }

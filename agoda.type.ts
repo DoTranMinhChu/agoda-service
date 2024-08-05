@@ -6,7 +6,7 @@ export type AgodaServiceConfig = {
 export interface IBaseResponse<Response> {
   data: Response;
   status: boolean;
-  meta: number;
+  meta: Meta;
   message: string;
 }
 export interface Meta {
