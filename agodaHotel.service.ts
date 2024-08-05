@@ -37,9 +37,22 @@ export class AgodaHotelService {
       await this.#_axiosInstance.get<ISearchHotelResponse>(
         "v2/booking/save_booking",
         {
-          params,
+          params: this.parseParamSearchOvernight(params),
         }
       )
     )?.data;
+  }
+  private parseParamSearchOvernight(_params: HotelSearchOvernightRequestType) {
+    const params: { [key: string]: Array<number> | string | number | Date } =
+      {};
+    for (const [key, value] of Object.entries(_params)) {
+      if (value instanceof Date)
+        params[key] = value.toISOString().split("T")[0];
+      if (Array.isArray(value)) params[key] = value.join(",");
+      if (key == "sort")
+        params.sort = [_params.sort.by, _params.sort.type].join(",");
+    }
+
+    return params;
   }
 }
