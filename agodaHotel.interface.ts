@@ -117,7 +117,7 @@ export interface IProperty {
   content: IContent;
   enrichment: IEnrichment;
   sponsoredDetail: ISponsoredDetail;
-  pricing: IPricing;
+  pricing: IPropertyPricing;
 }
 
 export interface IMetaLab {
@@ -249,7 +249,7 @@ export interface IContentReview {
   isDefault: boolean;
   demographics: IDemographics;
   summaries?: ISummaries;
-  cumulative: ICumulative2;
+  cumulative: ICumulative;
 }
 
 export interface IDemographics {
@@ -273,11 +273,6 @@ export interface ISummaries {
 
 export interface IRecommendationScore {
   recommendationScore: number;
-}
-
-export interface ICumulative2 {
-  reviewCount: number;
-  score: number;
 }
 
 export interface IFamilyFeatures {
@@ -361,7 +356,7 @@ export interface ISponsoredDetail {
   isShowSponsoredFlag: boolean;
 }
 
-export interface IPricing {
+export interface IPropertyPricing {
   hotelId: number;
   isReady: boolean;
   isAvailable: boolean;
@@ -374,7 +369,7 @@ export interface IPricing {
   roomBundle?: IRoomBundle;
   suggestedRoomQuantity: number;
   suggestPriceType: ISuggestPriceType;
-  loyaltyDisplay: ILoyaltyDisplay2;
+  loyaltyDisplay: ILoyaltyDisplay;
   cheapestStayPackageRatePlans: ICheapestStayPackageRatePlan[];
 }
 
@@ -433,7 +428,7 @@ export interface IRoom {
   supplierId: number;
   availableRooms: number;
   benefits: IBenefit[];
-  payment: IPayment2;
+  payment: IPayment;
   localVoucher: any;
   campaign: any;
   isPromoEligible: boolean;
@@ -446,19 +441,12 @@ export interface IRoom {
   loyaltyDisplay?: ILoyaltyDisplay;
   bookingDuration: any;
   corInfo: ICorInfo;
-  pricing: IPricing2;
+  pricing: IRoomPricing;
 }
 
 export interface IBenefit {
   benefitId: number;
   message: string;
-}
-
-export interface IPayment2 {
-  payLater: IPayLater;
-  cancellation: ICancellation;
-  noCreditCard: INoCreditCard;
-  payAtHotel: IPayAtHotel;
 }
 
 export interface IAgodaCash {
@@ -489,7 +477,7 @@ export interface ICorInfo {
   condition: string;
 }
 
-export interface IPricing2 {
+export interface IRoomPricing {
   price: IPrice;
   hotelPromo: IHotelPromo;
   customerPoints: ICustomerPoints;
@@ -549,27 +537,12 @@ export interface ISuggestPriceType {
   suggestPriceType: string;
 }
 
-export interface ILoyaltyDisplay2 {
-  loyaltyName: string;
-  loyaltyProgramName: string;
-  loyaltyBenefits: ILoyaltyBenefit2[];
-}
-
-export interface ILoyaltyBenefit2 {
-  title: string;
-  description: string;
-}
-
 export interface ICheapestStayPackageRatePlan {
   pricingMessages: IPricingMessage[];
   benefits: number[];
-  roomBundle?: IRoomBundle2;
+  roomBundle?: IRoomBundle;
   suggestedRoomQuantity: number;
   suggestPriceType: ISuggestPriceType;
-}
-
-export interface IRoomBundle2 {
-  roomOfferList: IRoomOfferList[];
 }
 
 export interface IAggregation {
@@ -789,11 +762,7 @@ export interface IFeature {
 
 export interface IImage {
   caption: string;
-  urls: IUrl2[];
-}
-
-export interface IUrl2 {
-  value: string;
+  urls: IUrl[];
 }
 
 export interface IHotelFacility {
