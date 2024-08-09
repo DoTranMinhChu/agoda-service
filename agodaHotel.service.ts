@@ -3,8 +3,14 @@ import { axiosInstance } from "./axiosBase";
 import { AgodaServiceConfig, IBaseResponse } from "./agoda.type";
 import {
   HotelAutoCompleteRequestType,
+  HotelDetailRequestType,
   HotelSearchOvernightRequestType,
 } from "./agodaHotel.type";
+import {
+  IHotelDetailResponse,
+  IHotelsAutoCompleteResponse,
+  ISearchHotelResponse,
+} from "./agodaHotel.interface";
 
 export class AgodaHotelService {
   #_apiKey: string;
@@ -58,5 +64,17 @@ export class AgodaHotelService {
     }
 
     return params;
+  }
+
+  async getHotelDetail(
+    params: HotelDetailRequestType
+  ): Promise<IBaseResponse<Array<IHotelDetailResponse>>> {
+    return (
+      await this.#_axiosInstance.get<
+        IBaseResponse<Array<IHotelDetailResponse>>
+      >("hotels/details", {
+        params,
+      })
+    )?.data;
   }
 }

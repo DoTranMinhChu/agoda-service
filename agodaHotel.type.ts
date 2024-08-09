@@ -205,3 +205,9 @@ export type HotelSearchOvernightRequestType = {
    */
   hostDetails?: Array<number>;
 };
+
+export type HotelDetailRequestType = {
+  //propertyId can be retrieved from /hotels/search (data->properties->propertyId)
+  propertyId: string;
+  language?: string;
+};
