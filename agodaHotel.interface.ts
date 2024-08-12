@@ -30,8 +30,8 @@ export interface ISearchHotelResponse {
   aggregation: IAggregation;
   geoPlaces: IGeoPlace[];
   searchEnrichment: ISearchEnrichment;
-  featuredAgodaHome: IFeaturedAgodaHome[];
-  highlyRatedAgodaHomes: IHighlyRatedAgodaHome[];
+  featuredAgodaHome: IProperty[];
+  highlyRatedAgodaHomes: IProperty[];
   extraAgodaHomes: any[];
   filters: IFilters;
 }
@@ -546,35 +546,37 @@ export interface ICheapestStayPackageRatePlan {
 }
 
 export interface IAggregation {
+  matrixGroupResults: IMatrixGroupResult[];
   agodaHomesCount: IAgodaHomesCount;
 }
-
+export interface IMatrixGroupResult {
+  matrixGroup: string;
+  matrixItemResults: IMatrixItemResult[];
+}
+export interface IMatrixItemResult {
+  id: number;
+  filterKey: string;
+  filterRequestType: string;
+  name: string;
+  count: number;
+}
 export interface IAgodaHomesCount {
   properties: IProperty[];
 }
 
 export interface IGeoPlace {
-  placeId: number;
-  placeName: string;
-  placeType: string;
-  parentPlaceId: number;
-  parentPlaceName: string;
+  id: number;
+  landmarkTypeId: number;
+  placeType: number;
+  name: string;
+  abbreviation: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface ISearchEnrichment {
   enrichment: string;
-}
-
-export interface IFeaturedAgodaHome {
-  homeId: number;
-  homeName: string;
-  price: number;
-}
-
-export interface IHighlyRatedAgodaHome {
-  homeId: number;
-  homeName: string;
-  rating: number;
+  creditCardCampaignInfos: any[];
 }
 
 export interface IFilters {
