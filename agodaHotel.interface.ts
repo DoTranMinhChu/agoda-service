@@ -441,7 +441,7 @@ export interface IRoom {
   loyaltyDisplay?: ILoyaltyDisplay;
   bookingDuration: any;
   corInfo: ICorInfo;
-  pricing: IRoomPricing;
+  pricing: IRoomPricing[];
 }
 
 export interface IBenefit {
