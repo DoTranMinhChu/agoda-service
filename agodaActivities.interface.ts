@@ -327,3 +327,108 @@ export interface IActivityReviewResult {
   media: IMedia[];
   replies: any[];
 }
+//========= Activities Calendar ===========
+
+export interface IActivitiesCalendarResponse {
+  isCompleted: boolean;
+  calendar: IActivityCalendarResult;
+}
+
+export interface IActivityCalendarResult {
+  masterActivityId: number;
+  masterSupplierId: number;
+  currency: string;
+  startDate: string;
+  endDate: string;
+  schedules: IActivityCalendarSchedules[];
+  additionalInfo: any;
+  offersCalendar: IActivityOffersCalendar[];
+}
+
+export interface IActivityCalendarSchedules {
+  date: string;
+  price: number;
+  isAvailable: boolean;
+  status: string;
+}
+
+export interface IActivityOffersCalendar {
+  offerId: number;
+  schedules: IActivityCalendarSchedules[];
+}
+//========= Activities Availability ===========
+export interface IActivityAvailabilityResponse {
+  isCompleted: boolean;
+  activity: IActivityAvailabilityResult;
+}
+export interface IActivityAvailabilityResult {
+  masterActivityId: number;
+  masterSupplierId: number;
+  offerPricing: IActivityAvailabilityOfferPricing;
+}
+export interface IActivityAvailabilityOfferPricing {
+  travelDate: string;
+  offers: IActivityAvailabilityOffer[];
+  bookingRequirements: IActivityAvailabilityOfferPricingBookingRequirement[];
+  paxRequirements: IActivityAvailabilityOfferPricingPaxRequirement[];
+}
+
+export interface IActivityAvailabilityOffer {
+  isCartEligible: boolean;
+  offerId: number;
+  offerGroupId: number;
+  offerGroupDetailRef: string;
+  offerDetailRef: any;
+  activityId: number;
+  isAvailable: boolean;
+  payment: Payment;
+  enrichedOfferOption: IActivityEnrichedOfferOption[];
+}
+
+export interface Payment {
+  paymentModel: string;
+  cancellation: Cancellation;
+}
+
+export interface Cancellation {
+  cancellationType: string;
+  policies: Policy[];
+}
+
+export interface Policy {
+  penaltyCode: string;
+  hoursFrom: number;
+  hoursUntil: number;
+}
+
+export interface IActivityEnrichedOfferOption {
+  offerId: number;
+  offerOptionId: number;
+  supplierOfferOptionCode: string;
+  specification: any[];
+  bookingRequirementRefId: number;
+  isAvailable: boolean;
+  offerOptionToken: string;
+  availableQuantity: number;
+  offerDetailsReference: string;
+  pricingSummary: IActivityRepresentativeInfoPricingSummary;
+}
+
+export interface IActivityAvailabilityOfferPricingBookingRequirement {
+  id: number;
+  adultRequired: boolean;
+  minPax: number;
+  maxPax: number;
+  paxRequirementRefId: number[];
+}
+
+export interface IActivityAvailabilityOfferPricingPaxRequirement {
+  id: number;
+  code: string;
+  minAge: number;
+  maxAge: number;
+  minPax: number;
+  maxPax: number;
+  minPaxWhenSelected: number;
+  paxIncrementalStep: number;
+}

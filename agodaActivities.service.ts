@@ -3,14 +3,18 @@ import { axiosInstance } from "./axiosBase";
 import { AgodaServiceConfig, IBaseResponse } from "./agoda.type";
 import {
   ActivitiesAutoCompleteRequestType,
+  ActivitiesAvailabilityRequestType,
+  ActivitiesCalendarRequestType,
   ActivitiesDetailRequestType,
   ActivitiesReviewRequestType,
   ActivitiesSearchRequestType,
 } from "./agodaActivities.type";
 import {
   IActivitiesAutoCompleteResponse,
+  IActivitiesCalendarResponse,
   IActivitiesReviewsResponse,
   IActivitiesSearchResponse,
+  IActivityAvailabilityResponse,
   IActivityDetailResponse,
 } from "./agodaActivities.interface";
 
@@ -56,7 +60,7 @@ export class AgodaActivitiesService {
     for (const [key, value] of Object.entries(_params)) {
       if (value == null || value == undefined) continue;
       params[key] = value as any;
-      if (["checkinDate", "checkoutDate"].includes(key))
+      if (["startDate", "endDate", "travelDate"].includes(key))
         params[key] = new Date(value?.toString()).toISOString().split("T")[0];
       if (Array.isArray(value)) params[key] = value.join(",");
 
@@ -90,6 +94,30 @@ export class AgodaActivitiesService {
           params: this.parseParam(params),
         }
       )
+    )?.data;
+  }
+
+  async calendar(
+    params: ActivitiesCalendarRequestType
+  ): Promise<IBaseResponse<IActivitiesCalendarResponse>> {
+    return (
+      await this.#_axiosInstance.get<
+        IBaseResponse<IActivitiesCalendarResponse>
+      >("v2/activities/calendar", {
+        params: this.parseParam(params),
+      })
+    )?.data;
+  }
+
+  async availability(
+    params: ActivitiesAvailabilityRequestType
+  ): Promise<IBaseResponse<IActivityAvailabilityResponse>> {
+    return (
+      await this.#_axiosInstance.get<
+        IBaseResponse<IActivityAvailabilityResponse>
+      >("v2/activities/availability", {
+        params: this.parseParam(params),
+      })
     )?.data;
   }
 }

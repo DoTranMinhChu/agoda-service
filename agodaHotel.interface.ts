@@ -25,18 +25,18 @@ interface IState {
 // =========== Hotel Search Overnight Start ===============
 
 export interface ISearchHotelResponse {
-  searchResult: ISearchResult;
-  properties: IProperty[];
+  searchResult: ISearchHotelResult;
+  properties: ISearchHotelProperty[];
   aggregation: IAggregation;
-  geoPlaces: IGeoPlace[];
-  searchEnrichment: ISearchEnrichment;
-  featuredAgodaHome: IProperty[];
-  highlyRatedAgodaHomes: IProperty[];
+  geoPlaces: ISearchHotelGeoPlace[];
+  searchEnrichment: ISearchHotelEnrichment;
+  featuredAgodaHome: ISearchHotelProperty[];
+  highlyRatedAgodaHomes: ISearchHotelProperty[];
   extraAgodaHomes: any[];
   filters: IFilters;
 }
 
-export interface ISearchResult {
+export interface ISearchHotelResult {
   searchInfo: ISearchInfo;
   urgencyDetail: IUrgencyDetail;
   histogram: IHistogram;
@@ -109,15 +109,15 @@ export interface IPriceRange {
   min: number;
 }
 
-export interface IProperty {
+export interface ISearchHotelProperty {
   propertyId: number;
   propertyResultType: string;
   metaLab: IMetaLab;
   soldOut: any;
-  content: IContent;
+  content: IHotelContent;
   enrichment: IEnrichment;
   sponsoredDetail: ISponsoredDetail;
-  pricing: IPropertyPricing;
+  pricing: ISearchHotelPropertyPricing;
 }
 
 export interface IMetaLab {
@@ -129,7 +129,7 @@ export interface IAttribute {
   value: string;
 }
 
-export interface IContent {
+export interface IHotelContent {
   propertyId: number;
   features: IFeatures;
   informationSummary: IInformationSummary;
@@ -137,7 +137,7 @@ export interface IContent {
   nonHotelAccommodation: INonHotelAccommodation;
   reviews: IReviews;
   familyFeatures: IFamilyFeatures;
-  propertyEngagement: IPropertyEngagement;
+  propertyEngagement: ISearchHotelPropertyEngagement;
   images: IImages;
   localInformation: ILocalInformation;
   rateCategories: IRateCategories;
@@ -236,7 +236,7 @@ export interface INonHotelAccommodation {
 
 export interface IReviews {
   cumulative: ICumulative;
-  contentReview: IContentReview[];
+  contentReview: IHotelContentReview[];
 }
 
 export interface ICumulative {
@@ -244,7 +244,7 @@ export interface ICumulative {
   score: number;
 }
 
-export interface IContentReview {
+export interface IHotelContentReview {
   providerId: number;
   isDefault: boolean;
   demographics: IDemographics;
@@ -283,7 +283,7 @@ export interface IFamilyFeatures {
   hasKidsPool: boolean;
 }
 
-export interface IPropertyEngagement {
+export interface ISearchHotelPropertyEngagement {
   peopleLooking: number;
   lastBooking: string;
   todayBooking: string;
@@ -356,7 +356,7 @@ export interface ISponsoredDetail {
   isShowSponsoredFlag: boolean;
 }
 
-export interface IPropertyPricing {
+export interface ISearchHotelPropertyPricing {
   hotelId: number;
   isReady: boolean;
   isAvailable: boolean;
@@ -561,10 +561,10 @@ export interface IMatrixItemResult {
   count: number;
 }
 export interface IAgodaHomesCount {
-  properties: IProperty[];
+  properties: ISearchHotelProperty[];
 }
 
-export interface IGeoPlace {
+export interface ISearchHotelGeoPlace {
   id: number;
   landmarkTypeId: number;
   placeType: number;
@@ -574,7 +574,7 @@ export interface IGeoPlace {
   longitude: number;
 }
 
-export interface ISearchEnrichment {
+export interface ISearchHotelEnrichment {
   enrichment: string;
   creditCardCampaignInfos: any[];
 }
@@ -606,26 +606,26 @@ export interface IMeta {
 
 export interface IHotelDetailResponse {
   propertyId: number;
-  contentDetail: IContentDetail;
+  contentDetail: IHotelContentDetail;
   metaLab: IMetaLab;
 }
 
-export interface IContentDetail {
+export interface IHotelContentDetail {
   propertyId: number;
   hostProfile: any;
-  contentImages: IContentImages;
-  contentReviewScore: IContentReviewScore;
-  contentReviewSummaries: IContentReviewSummaries;
-  contentEngagement: IContentEngagement;
-  contentHighlights: IContentHighlights;
-  contentFeatures: IContentFeatures;
-  contentInformation: IContentInformation;
-  contentSummary: IContentSummary;
-  contentLocalInformation: IContentLocalInformation;
-  contentExperiences: IContentExperiences;
+  contentImages: IHotelContentImages;
+  contentReviewScore: IHotelContentReviewScore;
+  contentReviewSummaries: IHotelContentReviewSummaries;
+  contentEngagement: IHotelContentEngagement;
+  contentHighlights: IHotelContentHighlights;
+  contentFeatures: IHotelContentFeatures;
+  contentInformation: IHotelContentInformation;
+  contentSummary: IHotelContentSummary;
+  contentLocalInformation: IHotelContentLocalInformation;
+  contentExperiences: IHotelContentExperiences;
 }
 
-export interface IContentImages {
+export interface IHotelContentImages {
   hotelImages: IHotelImage[];
   matterports: any[];
   categories: ICategory[];
@@ -651,7 +651,7 @@ export interface ICategory {
   count: number;
 }
 
-export interface IContentReviewScore {
+export interface IHotelContentReviewScore {
   combinedReviewScore: ICumulative;
   providerReviewScore: IProviderReviewScore[];
 }
@@ -696,7 +696,7 @@ export interface ITrendingScore {
   past30DaysUplift: number;
 }
 
-export interface IContentReviewSummaries {
+export interface IHotelContentReviewSummaries {
   snippets: ISnippet[];
   recommendationScores: IRecommendationScores;
   positiveMentions: IPositiveMentions;
@@ -719,12 +719,12 @@ export interface IPositiveMentions {
   bcomReviewScores: any[];
 }
 
-export interface IContentEngagement {
+export interface IHotelContentEngagement {
   lastBooked: string;
   noOfPeopleLooking: number;
 }
 
-export interface IContentHighlights {
+export interface IHotelContentHighlights {
   locationHighlights: ILocationHighlight[];
   favoriteFeatures: IFavoriteFeature[];
 }
@@ -740,7 +740,7 @@ export interface IFavoriteFeature {
   symbol: string;
 }
 
-export interface IContentFeatures {
+export interface IHotelContentFeatures {
   featureGroups: IFeatureGroup[];
   hotelFacilities: IHotelFacility[];
   summary: ISummary;
@@ -776,7 +776,7 @@ export interface ISummary {
   hygienePlusFacilities: any;
 }
 
-export interface IContentInformation {
+export interface IHotelContentInformation {
   policies: IPolicies;
   isAgodaVerified: boolean;
   messaging: IMessaging;
@@ -876,14 +876,14 @@ export interface IRestaurantOnSite {
   cuisines: string[];
 }
 
-export interface IContentSummary {
+export interface IHotelContentSummary {
   accommodation: IAccommodation;
   agodaGuaranteeProgram: boolean;
   hasHostExperience: boolean;
   localeName: string;
   defaultName: string;
   propertyType: string;
-  propertyLinks: IPropertyLinks;
+  propertyLinks: ISearchHotelPropertyLinks;
   geoInfo: IGeoInfo;
   address: IAddress;
   spokenLanguages: ISpokenLanguage[];
@@ -896,7 +896,7 @@ export interface IAccommodation {
   accommodationName: string;
 }
 
-export interface IPropertyLinks {
+export interface ISearchHotelPropertyLinks {
   propertyPage: string;
 }
 
@@ -939,7 +939,7 @@ export interface INhaSummary {
   supportedLongStay: any;
 }
 
-export interface IContentLocalInformation {
+export interface IHotelContentLocalInformation {
   nearbyPlaces: INearbyPlace[];
   topPlaces: ITopPlace[];
   nearbyProperties: INearbyProperty[];
@@ -997,7 +997,7 @@ export interface INearbyShop {
   geoInfo: IGeoInfo;
 }
 
-export interface IContentExperiences {
+export interface IHotelContentExperiences {
   experience: IExperience[];
 }
 
@@ -1014,10 +1014,69 @@ export interface ILandmark {
 }
 
 export interface IMetaLab {
-  propertyAttributes: IPropertyAttribute[];
+  propertyAttributes: ISearchHotelPropertyAttribute[];
 }
 
-export interface IPropertyAttribute {
+export interface ISearchHotelPropertyAttribute {
   attributeId: number;
   value: string;
+}
+
+// ========= Hotel Review ========
+
+export interface IHotelReviewResponse {
+  comments: IHotelReviewComment[];
+  errors: any[];
+  resultStatus: IHotelReviewResultStatus;
+  serverTime: string;
+  serverName: string;
+  processTime: any;
+}
+
+export interface IHotelReviewComment {
+  id: number;
+  providerId: number;
+  reviewerInfo: IHotelReviewCommentReviewerInfo;
+  reviewDetail: IHotelReviewCommentReviewDetail;
+  responseInfo: any;
+  rating: IHotelReviewCommentRating;
+}
+
+export interface IHotelReviewCommentReviewerInfo {
+  name: string;
+  demographicName: string;
+  country: IHotelReviewCommentReviewerInfoCountry;
+  checkInDate: string;
+  checkOutDate: string;
+}
+
+export interface IHotelReviewCommentReviewerInfoCountry {
+  id: number;
+  name: string;
+  countryIso2: string;
+}
+
+export interface IHotelReviewCommentReviewDetail {
+  date: string;
+  title: string;
+  originalTitle: string;
+  positive: string;
+  negative: string;
+  comment: string;
+  originalComment: string;
+  languageId: number;
+}
+
+export interface IHotelReviewCommentRating {
+  score: number;
+  scoreText: string;
+}
+
+export interface IHotelReviewResultStatus {
+  category: number;
+  serverStatus: number;
+  message: string;
+  serverMessage: string;
+  severity: number;
+  isSuccess: boolean;
 }

@@ -1,4 +1,5 @@
 import { AgodaServiceConfig } from "./agoda.type";
+import { AgodaActivitiesService } from "./agodaActivities.service";
 import { AgodaHotelService } from "./agodaHotel.service";
 
 export class AgodaService {
@@ -11,5 +12,8 @@ export class AgodaService {
 
   get hotel() {
     return new AgodaHotelService(this._agodaServiceConfig);
+  }
+  get activity() {
+    return new AgodaActivitiesService(this._agodaServiceConfig);
   }
 }

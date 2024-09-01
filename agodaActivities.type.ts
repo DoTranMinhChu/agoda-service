@@ -211,3 +211,87 @@ export type ActivitiesReviewRequestType = {
    */
   starRating?: Array<number>;
 };
+
+// ==== Calendar ======
+export type ActivitiesCalendarRequestType = {
+  /**
+   * Required: true
+   * activityId can be retrieved from /activities/auto-complete (data->suggestionList->activityId)
+   * Ex: eyJjIjozMTgsIm4iOiJOZXcgWW9yayAoTlkpIiwidSI6MTgxLCJtIjoiVW5pdGVkIFN0YXRlcyIsInMiOiJVUyIsImEiOjAsImUiOiJ1bmRlZmluZWQiLCJ0IjoiTmV3IFlvcmsgU3RhdGUiLCJsIjoiL2NpdHkvdW5pdGVkX3N0YXRlcy9uZXdfeW9ya19ueSIsImFjIjpudWxsfQ== (New York (NY))
+   */
+  activityId: string;
+
+  /**
+   * Required: true
+   * activityToken can be retrieved from /activities/details (data->activity->activityRepresentativeInfo->activityToken)
+   * Ex: AAABdPACeyJhaWQiOjEwMzQwNDEsInMOAPACNTAwMDIsInNhYyI6IiIsIm8VAFMwLCJzbxEAMmN1cgkA8A1wcmljZSI6eyJkdCI6IkJPT0siLCJxIjoxLCJ0FwAgZXgGALFjdCI6MC4wLCJjbwkAX30sImFsGQAEomUiOm51bGwsImEJAOB9LCJsbyI6W10sInBtYwkAr30sInN0YXJ0cHJ5AF8kdGQmADRvc3QLAEVwYXhyDAAUbQoAFWIUABRvQAFwcHIiOltdfQ
+   */
+  activityToken: string;
+
+  /**
+   * currency can be retrieved from /currencies (data->Code)
+   * Ex: EUR
+   * Default: USD
+   */
+  currency?: string;
+  /**
+   * language can be retrieved from /languages (data->Code)
+   * The language must match the language passed in the /activities/search endpoint
+   * Ex: en-us
+   * Default: en-us
+   */
+  language?: string;
+
+  /**
+   * Start date
+   * Format: YYYY-MM-DD
+   * Ex: 2024-06-16
+   * Default: Current date
+   */
+  startDate?: Date;
+
+  /**
+   * End date
+   * Format: YYYY-MM-DD
+   * Ex: 2024-07-16
+   * Default: Current date + 1 month
+   */
+  endDate?: Date;
+};
+// ==== Availability ======
+export type ActivitiesAvailabilityRequestType = {
+  /**
+   * Required: true
+   * activityId can be retrieved from /activities/auto-complete (data->suggestionList->activityId)
+   * Ex: eyJjIjozMTgsIm4iOiJOZXcgWW9yayAoTlkpIiwidSI6MTgxLCJtIjoiVW5pdGVkIFN0YXRlcyIsInMiOiJVUyIsImEiOjAsImUiOiJ1bmRlZmluZWQiLCJ0IjoiTmV3IFlvcmsgU3RhdGUiLCJsIjoiL2NpdHkvdW5pdGVkX3N0YXRlcy9uZXdfeW9ya19ueSIsImFjIjpudWxsfQ== (New York (NY))
+   */
+  activityId: string;
+
+  /**
+   * Required: true
+   * activityToken can be retrieved from /activities/details (data->activity->activityRepresentativeInfo->activityToken)
+   * Ex: AAABdPACeyJhaWQiOjEwMzQwNDEsInMOAPACNTAwMDIsInNhYyI6IiIsIm8VAFMwLCJzbxEAMmN1cgkA8A1wcmljZSI6eyJkdCI6IkJPT0siLCJxIjoxLCJ0FwAgZXgGALFjdCI6MC4wLCJjbwkAX30sImFsGQAEomUiOm51bGwsImEJAOB9LCJsbyI6W10sInBtYwkAr30sInN0YXJ0cHJ5AF8kdGQmADRvc3QLAEVwYXhyDAAUbQoAFWIUABRvQAFwcHIiOltdfQ
+   */
+  activityToken: string;
+
+  /**
+   * currency can be retrieved from /currencies (data->Code)
+   * Ex: EUR
+   * Default: USD
+   */
+  currency?: string;
+  /**
+   * language can be retrieved from /languages (data->Code)
+   * The language must match the language passed in the /activities/search endpoint
+   * Ex: en-us
+   * Default: en-us
+   */
+  language?: string;
+
+  /**
+   * Travel  date
+   * Format: YYYY-MM-DD
+   * Ex: 2024-06-16
+   */
+  travelDate: Date;
+};

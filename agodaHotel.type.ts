@@ -9,7 +9,19 @@ export type HotelSearchOvernightRequestType = {
   checkinDate: Date;
   //YYYY-MM-DD
   checkoutDate: Date;
+
+  /**
+   * Total number of record per api call
+   * The limit must be between 0 and 50
+   * Ex: 2Default: 20
+   */
   limit?: number;
+
+  /**
+   * The page index, for paging purpose
+   * Default: 1
+   * Ex: 2
+   */
   page?: number;
   language?: string;
   currency?: string;
@@ -209,5 +221,82 @@ export type HotelSearchOvernightRequestType = {
 export type HotelDetailRequestType = {
   //propertyId can be retrieved from /hotels/search (data->properties->propertyId)
   propertyId: string;
+  /**
+   * language can be retrieved from /languages (data->Code) Ex: en-us Default: en-us
+   */
   language?: string;
+};
+
+//==== Hotel Review ===
+export type HotelReviewRequestType = {
+  /**
+   * Required: true
+   * propertyId can be retrieved from the /hotels/search endpoint (data->properties->propertyId)
+   * Ex: 9062231
+   * You can view the count of reviews from the /hotels/details (data->contentDetail->contentReviewScore->providerReviewScore->cumulative->reviewCount)
+   */
+  propertyId: string;
+
+  /**
+   * Review sources reviewSources can be retrieved from the /hotels/details (data->contentDetail->contentReviewScore->providerReviewScore->providerId)
+   * Ex: 332
+   * Default: 332
+   * Some example values
+   * -1: All
+   * 332: Agoda
+   * 3038: Booking.com
+   */
+  reviewSources?: number;
+
+  /**
+   * Total number of record per api call
+   * The limit must be between 0 and 50
+   * Ex: 2Default: 20
+   */
+  limit?: number;
+
+  /**
+   * The page index, for paging purpose
+   * Default: 1
+   * Ex: 2
+   */
+  page?: number;
+
+  /**
+   * Sort by
+   * Ex: 7
+   * Default: 7
+   * Some example values
+   * 1: Most recent
+   * 2: Rating, high to low
+   * 3: Rating, low to high
+   * 7: Most helpful
+   */
+  sort?: number;
+
+  /**
+   * Traveler types
+   * travelerType can be retrieved from the /hotels/details (data->contentDetail->contentReviewScore->providerReviewScore->demographics->groups->id)
+   * Ex: 0
+   * Default: 0
+   * Some example values
+   * 0: All guests
+   * 1: Business travelers
+   * 2: Couples
+   * 3: Solo travelers
+   * 4: Families with young children
+   * 5: Families with teens
+   * 6: Groups
+   */
+  travelerType?: number;
+
+  /**
+   * language can be retrieved from /languages (data->Code) Ex: en-us Default: en-us
+   */
+  language?: string;
+
+  /**
+   * currency can be retrieved from /currencies (data->Code) Ex: EUR Default: USD
+   */
+  currency?: string;
 };
