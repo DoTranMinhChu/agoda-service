@@ -1,9 +1,9 @@
 export enum EActivatesDuration {
-  "UpTo1Hour" = "UpTo1Hour",
-  "1To4Hour" = "1To4Hour",
-  "4To24Hour" = "4To24Hour",
-  "24To72Hour" = "24To72Hour",
-  "MoreThan72Hour" = "MoreThan72Hour",
+  "UpToOneHour" = "UpTo1Hour",
+  "OneToFourHours" = "1To4Hour",
+  "FourToTwentyFourHours" = "4To24Hour",
+  "TwentyFourToSeventyTwoHours" = "24To72Hour",
+  "MoreThanSeventyTwoHours" = "MoreThan72Hour",
 }
 export enum EActivatesCategory {
   "All" = "All",
