@@ -76,7 +76,7 @@ export class AgodaActivitiesService {
   ): Promise<IBaseResponse<IActivityDetailResponse>> {
     return (
       await this.#_axiosInstance.get<IBaseResponse<IActivityDetailResponse>>(
-        "v2/activities/detail",
+        "v2/activities/details",
         {
           params: this.parseParam(params),
         }
