@@ -5,19 +5,32 @@ export interface IHotelsAutoCompleteResponse {
   typeName: string;
   subTypeId: number;
   subTypeName: string;
-  area: IState;
-  city?: IState;
-  country: IState;
+  area: IHotelState;
+  city?: IHotelState;
+  country: IHotelState;
   latitude: number;
   longitude: number;
   searchType: number;
   imageUrl: string;
   activeHotels: number;
   landingUrl: string;
-  state?: IState;
+  state?: IHotelState;
+}
+export interface IHotelBaseText {
+  title: string;
+  subtitle: string;
+  note: string;
+}
+export interface IHotelAmountBase {
+  amount: number;
+}
+
+export interface IHotelPriceBase {
+  exclusive: number;
+  inclusive: number;
 }
 // =========== Hotel Auto Complete ===============
-interface IState {
+interface IHotelState {
   id: number;
   name: string;
 }
@@ -27,7 +40,7 @@ interface IState {
 export interface ISearchHotelResponse {
   searchResult: ISearchHotelResult;
   properties: ISearchHotelProperty[];
-  aggregation: IAggregation;
+  aggregation: IHotelAggregation;
   geoPlaces: ISearchHotelGeoPlace[];
   searchEnrichment: ISearchHotelEnrichment;
   featuredAgodaHome: ISearchHotelProperty[];
@@ -37,20 +50,20 @@ export interface ISearchHotelResponse {
 }
 
 export interface ISearchHotelResult {
-  searchInfo: ISearchInfo;
-  urgencyDetail: IUrgencyDetail;
-  histogram: IHistogram;
+  searchInfo: ISearchHotelInfo;
+  urgencyDetail: ISearchHotelUrgencyDetail;
+  histogram: IHotelHistogram;
   isFreeTextSortMatch: any;
   nhaProbability: string;
   cid: number;
 }
 
-export interface ISearchInfo {
+export interface ISearchHotelInfo {
   totalActiveHotels: number;
   totalFilteredHotels: number;
   totalAvailableHotelsWithoutFilter: number;
-  searchStatus: ISearchStatus;
-  objectInfo: IObjectInfo;
+  searchStatus: ISearchHotelInfoStatus;
+  objectInfo: ISearchHotelObjectInfo;
   isComplete: boolean;
   hasSecretDeal: boolean;
   hasInsiderDeal: boolean;
@@ -58,7 +71,7 @@ export interface ISearchInfo {
   hasEscapesPackage: boolean;
 }
 
-export interface ISearchStatus {
+export interface ISearchHotelInfoStatus {
   searchStatus: string;
   searchCriteria: ISearchCriteria;
 }
@@ -67,7 +80,7 @@ export interface ISearchCriteria {
   checkIn: string;
 }
 
-export interface IObjectInfo {
+export interface ISearchHotelObjectInfo {
   cityId: number;
   cityName: string;
   cityEnglishName: string;
@@ -79,31 +92,31 @@ export interface IObjectInfo {
   objectName: string;
 }
 
-export interface IUrgencyDetail {
+export interface ISearchHotelUrgencyDetail {
   urgencyScore: number;
 }
 
-export interface IHistogram {
-  bins: IBin[];
-  maxMinPrice: IMaxMinPrice;
+export interface IHotelHistogram {
+  bins: IHotelHistogramBin[];
+  maxMinPrice: IHotelMaxMinPrice;
 }
 
-export interface IBin {
+export interface IHotelHistogramBin {
   numOfElements: number;
-  upperBound: IUpperBound;
+  upperBound: IHotelUpperBound;
 }
 
-export interface IUpperBound {
+export interface IHotelUpperBound {
   perNightPerRoom: number;
   perBooking: number;
 }
 
-export interface IMaxMinPrice {
-  perRoomPerNight: IPriceRange;
-  perBook: IPriceRange;
+export interface IHotelMaxMinPrice {
+  perRoomPerNight: IHotelPriceRange;
+  perBook: IHotelPriceRange;
 }
 
-export interface IPriceRange {
+export interface IHotelPriceRange {
   max: number;
   median: any;
   min: number;
@@ -112,38 +125,38 @@ export interface IPriceRange {
 export interface ISearchHotelProperty {
   propertyId: number;
   propertyResultType: string;
-  metaLab: IMetaLab;
+  metaLab: IHotelMetaLab;
   soldOut: any;
   content: IHotelContent;
-  enrichment: IEnrichment;
-  sponsoredDetail: ISponsoredDetail;
+  enrichment: IHotelEnrichment;
+  sponsoredDetail: IHotelSponsoredDetail;
   pricing: ISearchHotelPropertyPricing;
 }
 
-export interface IMetaLab {
-  attributes: IAttribute[];
+export interface IHotelMetaLab {
+  attributes: IHotelAttribute[];
 }
 
-export interface IAttribute {
+export interface IHotelAttribute {
   attributeId: number;
   value: string;
 }
 
 export interface IHotelContent {
   propertyId: number;
-  features: IFeatures;
+  features: IHotelFeatures;
   informationSummary: IInformationSummary;
   highlight: IHighlight;
   nonHotelAccommodation: INonHotelAccommodation;
-  reviews: IReviews;
-  familyFeatures: IFamilyFeatures;
+  reviews: IHotelReviews;
+  familyFeatures: IHotelFamilyFeatures;
   propertyEngagement: ISearchHotelPropertyEngagement;
-  images: IImages;
-  localInformation: ILocalInformation;
-  rateCategories: IRateCategories;
+  images: IHotelImages;
+  localInformation: IHotelLocalInformation;
+  rateCategories: IHotelRateCategories;
 }
 
-export interface IFeatures {
+export interface IHotelFeatures {
   hotelFacilities: IHotelFacility[];
 }
 
@@ -156,12 +169,12 @@ export interface IInformationSummary {
   localeName: string;
   defaultName: string;
   propertyType: string;
-  accommodation: IAccommodation;
+  accommodation: IHotelAccommodation;
   remarks: any;
-  address: IAddress;
-  geoInfo: IGeoInfo;
+  address: IHotelAddress;
+  geoInfo: IHotelGeoInfo;
   rating: number;
-  spokenLanguages: ISpokenLanguage[];
+  spokenLanguages: IHotelContentSpokenLanguage[];
   awardYear: any;
   hasHostExperience: boolean;
   agodaGuaranteeProgram: boolean;
@@ -169,40 +182,40 @@ export interface IInformationSummary {
   hotelCharacter?: IHotelCharacter;
 }
 
-export interface IAccommodation {
+export interface IHotelAccommodation {
   accommodationName: string;
   accommodationType: number;
 }
 
-export interface IAddress {
-  country: ICountry;
-  city: ICity;
-  area: IArea;
+export interface IHotelAddress {
+  country: IHotelCountry;
+  city: IHotelCity;
+  area: IHotelArea;
 }
 
-export interface ICountry {
+export interface IHotelCountry {
   id: number;
   name: string;
 }
 
-export interface ICity {
+export interface IHotelCity {
   id: number;
   name: string;
 }
 
-export interface IArea {
+export interface IHotelArea {
   id: number;
   name: string;
 }
 
-export interface IGeoInfo {
+export interface IHotelGeoInfo {
   latitude: number;
   longitude: number;
   obfuscatedLat: number;
   obfuscatedLong: number;
 }
 
-export interface ISpokenLanguage {
+export interface IHotelContentSpokenLanguage {
   id: number;
 }
 
@@ -218,11 +231,11 @@ export interface IHotelTag {
 
 export interface IHighlight {
   distance: any[];
-  cityCenter: ICityCenter;
+  cityCenter: IHotelCityCenter;
   hasNearbyPublicTransportation: boolean;
 }
 
-export interface ICityCenter {
+export interface IHotelCityCenter {
   isInsideCityCenter: boolean;
   distanceFromCityCenter: number;
 }
@@ -234,12 +247,12 @@ export interface INonHotelAccommodation {
   supportedLongStay: any;
 }
 
-export interface IReviews {
-  cumulative: ICumulative;
+export interface IHotelReviews {
+  cumulative: IHotelCumulative;
   contentReview: IHotelContentReview[];
 }
 
-export interface ICumulative {
+export interface IHotelCumulative {
   reviewCount: number;
   score: number;
 }
@@ -247,35 +260,35 @@ export interface ICumulative {
 export interface IHotelContentReview {
   providerId: number;
   isDefault: boolean;
-  demographics: IDemographics;
-  summaries?: ISummaries;
-  cumulative: ICumulative;
+  demographics: IHotelDemographics;
+  summaries?: IHotelSummaries;
+  cumulative: IHotelCumulative;
 }
 
-export interface IDemographics {
-  groups: IGroup[];
+export interface IHotelDemographics {
+  groups: IHotelGroup[];
 }
 
-export interface IGroup {
+export interface IHotelGroup {
   id: number;
   reviewCount: number;
-  grades: IGrade[];
+  grades: IHotelGrade[];
 }
 
-export interface IGrade {
+export interface IHotelGrade {
   id: string;
   score: number;
 }
 
-export interface ISummaries {
-  recommendationScores: IRecommendationScore[];
+export interface IHotelSummaries {
+  recommendationScores: IHotelRecommendationScore[];
 }
 
-export interface IRecommendationScore {
+export interface IHotelRecommendationScore {
   recommendationScore: number;
 }
 
-export interface IFamilyFeatures {
+export interface IHotelFamilyFeatures {
   isFamilyRoom: boolean;
   isInterConnectingRoom: boolean;
   isInfantCottageAvailable: boolean;
@@ -289,55 +302,57 @@ export interface ISearchHotelPropertyEngagement {
   todayBooking: string;
 }
 
-export interface IImages {
+export interface IHotelImages {
   hotelImages: IHotelImage[];
 }
 
 export interface IHotelImage {
   id: number;
   caption: string;
-  urls: IUrl[];
+  urls: IHotelUrl[];
   groupId: string;
   typeId: number;
+  uploadedDate: Date;
   blurhash: string;
+  snippet: any;
 }
 
-export interface IUrl {
+export interface IHotelUrl {
   key: string;
   value: string;
 }
 
-export interface ILocalInformation {
-  landmarks: ILandmarks;
+export interface IHotelLocalInformation {
+  landmarks: IHotelLandmarks;
   hasAirportTransfer: boolean;
 }
 
-export interface ILandmarks {
-  topLandmark: ITopLandmark[];
+export interface IHotelLandmarks {
+  topLandmark: IHotelTopLandmark[];
 }
 
-export interface ITopLandmark {
+export interface IHotelTopLandmark {
   landmarkName: string;
   distanceInM: number;
 }
 
-export interface IRateCategories {
+export interface IHotelRateCategories {
   escapeRateCategories: any;
 }
 
-export interface IEnrichment {
-  topSellingPoint: ITopSellingPoint[];
-  uniqueSellingPoint: IUniqueSellingPoint[];
-  roomInformation: IRoomInformation;
+export interface IHotelEnrichment {
+  topSellingPoint: IHotelTopSellingPoint[];
+  uniqueSellingPoint: IHotelUniqueSellingPoint[];
+  roomInformation: IHotelRoomInformation;
 }
 
-export interface ITopSellingPoint {
+export interface IHotelTopSellingPoint {
   tspType: string;
   value?: number;
   cmsId: number;
 }
 
-export interface IUniqueSellingPoint {
+export interface IHotelUniqueSellingPoint {
   uspType: string;
   uspPropertyType?: string;
   value?: number;
@@ -345,12 +360,12 @@ export interface IUniqueSellingPoint {
   segment?: string;
 }
 
-export interface IRoomInformation {
+export interface IHotelRoomInformation {
   cheapestRoomSizeSqm: any;
   cheapestRoomName?: string;
 }
 
-export interface ISponsoredDetail {
+export interface IHotelSponsoredDetail {
   trackingData?: string;
   sponsoredType: string;
   isShowSponsoredFlag: boolean;
@@ -362,55 +377,55 @@ export interface ISearchHotelPropertyPricing {
   isAvailable: boolean;
   isEasyCancel: boolean;
   isSuggested: boolean;
-  payment: IPayment;
-  pricingMessages: IPricingMessage[];
+  payment: IHotelPayment;
+  pricingMessages: IHotelPricingMessage[];
   benefits: number[];
-  offers: IOffer[];
-  roomBundle?: IRoomBundle;
+  offers: IHotelOffer[];
+  roomBundle?: IHotelRoomBundle;
   suggestedRoomQuantity: number;
   suggestPriceType: ISuggestPriceType;
-  loyaltyDisplay: ILoyaltyDisplay;
+  loyaltyDisplay: IHotelLoyaltyDisplay;
   cheapestStayPackageRatePlans: ICheapestStayPackageRatePlan[];
 }
 
-export interface IPayment {
-  payLater: IPayLater;
-  cancellation: ICancellation;
-  noCreditCard: INoCreditCard;
-  payAtHotel: IPayAtHotel;
+export interface IHotelPayment {
+  payLater: IHotelPayLater;
+  cancellation: IHotelCancellation;
+  noCreditCard: IHotelNoCreditCard;
+  payAtHotel: IHotelPayAtHotel;
 }
 
-export interface IPayLater {
+export interface IHotelPayLater {
   isEligible: boolean;
   authDate: string;
   chargeDate: string;
 }
 
-export interface ICancellation {
+export interface IHotelCancellation {
   code: string;
   cancellationType: string;
 }
 
-export interface INoCreditCard {
+export interface IHotelNoCreditCard {
   isEligible: boolean;
 }
 
-export interface IPayAtHotel {
+export interface IHotelPayAtHotel {
   isEligible: boolean;
 }
 
-export interface IPricingMessage {
+export interface IHotelPricingMessage {
   location: number;
   ids: number[];
 }
 
-export interface IOffer {
+export interface IHotelOffer {
   bundleType: string;
-  bundleDetail?: IBundleDetail;
-  roomOffers: IRoomOffer[];
+  bundleDetail?: IHotelBundleDetail;
+  roomOffers: IHotelRoomOffer[];
 }
 
-export interface IBundleDetail {
+export interface IHotelBundleDetail {
   bundleSegmentRoomIdentifiers: IBundleSegmentRoomIdentifier[];
 }
 
@@ -419,76 +434,72 @@ export interface IBundleSegmentRoomIdentifier {
   quantity: number;
 }
 
-export interface IRoomOffer {
-  room: IRoom;
+export interface IHotelRoomOffer {
+  room: IHotelRoom;
 }
 
-export interface IRoom {
+export interface IHotelRoom {
   uid: string;
   supplierId: number;
   availableRooms: number;
-  benefits: IBenefit[];
-  payment: IPayment;
+  benefits: IHotelBenefit[];
+  payment: IHotelPayment;
   localVoucher: any;
   campaign: any;
   isPromoEligible: boolean;
   occupancy: number;
-  agodaCash: IAgodaCash;
+  agodaCash: IHotelAmountBase;
   cashback: any;
-  discount: IDiscount;
-  channel: IChannel;
+  discount: IHotelDiscount;
+  channel: IHotelRoomChannel;
   promotions: any;
-  loyaltyDisplay?: ILoyaltyDisplay;
+  loyaltyDisplay?: IHotelLoyaltyDisplay;
   bookingDuration: any;
-  corInfo: ICorInfo;
-  pricing: IRoomPricing[];
+  corInfo: IHotelCorInfo;
+  pricing: IHotelRoomPricing[];
 }
 
-export interface IBenefit {
+export interface IHotelBenefit {
   benefitId: number;
   message: string;
 }
 
-export interface IAgodaCash {
-  amount: any;
-}
-
-export interface IDiscount {
+export interface IHotelDiscount {
   originalPrice: number;
   discountPercentage: number;
 }
 
-export interface IChannel {
+export interface IHotelRoomChannel {
   channel: string;
 }
 
-export interface ILoyaltyDisplay {
+export interface IHotelLoyaltyDisplay {
   loyaltyName: string;
   loyaltyProgramName: string;
-  loyaltyBenefits: ILoyaltyBenefit[];
+  loyaltyBenefits: IHotelLoyaltyBenefit[];
 }
 
-export interface ILoyaltyBenefit {
+export interface IHotelLoyaltyBenefit {
   title: string;
   description: string;
 }
 
-export interface ICorInfo {
+export interface IHotelCorInfo {
   condition: string;
 }
 
-export interface IRoomPricing {
-  price: IPrice;
+export interface IHotelRoomPricing {
+  price: IHotelRoomPrice;
   hotelPromo: IHotelPromo;
-  customerPoints: ICustomerPoints;
-  customerPay?: ICustomerPay;
+  customerPoints: IHotelRoomCustomerPoints;
+  customerPay?: IHotelRoomCustomerPay;
   rebateInCountry: IRebateInCountry;
   vatOnServiceCharge: IVatOnServiceCharge;
   vatOnBoardingPass: IVatOnBoardingPass;
   vatOnCouponDiscount: IVatOnCouponDiscount;
 }
 
-export interface IPrice {
+export interface IHotelRoomPrice {
   perRoomPerNight: number;
   perBooking: number;
 }
@@ -497,11 +508,11 @@ export interface IHotelPromo {
   totalPromo: number;
 }
 
-export interface ICustomerPoints {
+export interface IHotelRoomCustomerPoints {
   pointsAmount: number;
 }
 
-export interface ICustomerPay {
+export interface IHotelRoomCustomerPay {
   amountInHotelCurrency: number;
   amountInDisplayCurrency: number;
 }
@@ -525,12 +536,12 @@ export interface IVatOnCouponDiscount {
   amountInDisplayCurrency: number;
 }
 
-export interface IRoomBundle {
-  roomOfferList: IRoomOfferList[];
+export interface IHotelRoomBundle {
+  roomOfferList: IHotelRoomOfferList[];
 }
 
-export interface IRoomOfferList {
-  roomOffer: IRoomOffer;
+export interface IHotelRoomOfferList {
+  roomOffer: IHotelRoomOffer;
 }
 
 export interface ISuggestPriceType {
@@ -538,14 +549,14 @@ export interface ISuggestPriceType {
 }
 
 export interface ICheapestStayPackageRatePlan {
-  pricingMessages: IPricingMessage[];
+  pricingMessages: IHotelPricingMessage[];
   benefits: number[];
-  roomBundle?: IRoomBundle;
+  roomBundle?: IHotelRoomBundle;
   suggestedRoomQuantity: number;
   suggestPriceType: ISuggestPriceType;
 }
 
-export interface IAggregation {
+export interface IHotelAggregation {
   matrixGroupResults: IMatrixGroupResult[];
   agodaHomesCount: IAgodaHomesCount;
 }
@@ -607,7 +618,7 @@ export interface IMeta {
 export interface IHotelDetailResponse {
   propertyId: number;
   contentDetail: IHotelContentDetail;
-  metaLab: IMetaLab;
+  metaLab: IHotelMetaLab;
 }
 
 export interface IHotelContentDetail {
@@ -631,17 +642,7 @@ export interface IHotelContentImages {
   categories: ICategory[];
 }
 
-export interface IHotelImage {
-  id: number;
-  caption: string;
-  groupId: string;
-  urls: IUrl[];
-  typeId: number;
-  uploadedDate?: string;
-  snippet: any;
-}
-
-export interface IUrl {
+export interface IHotelUrl {
   key: string;
   value: string;
 }
@@ -652,11 +653,11 @@ export interface ICategory {
 }
 
 export interface IHotelContentReviewScore {
-  combinedReviewScore: ICumulative;
+  combinedReviewScore: IHotelCumulative;
   providerReviewScore: IProviderReviewScore[];
 }
 
-export interface ICumulative {
+export interface IHotelCumulative {
   score: number;
   reviewCount: number;
 }
@@ -664,23 +665,23 @@ export interface ICumulative {
 export interface IProviderReviewScore {
   providerId: number;
   isDefault: boolean;
-  cumulative: ICumulative;
-  demographics: IDemographics;
+  cumulative: IHotelCumulative;
+  demographics: IHotelDemographics;
   trendingScore?: ITrendingScore;
 }
 
-export interface IDemographics {
-  groups: IGroup[];
+export interface IHotelDemographics {
+  groups: IHotelGroup[];
   allGuest: IAllGuest;
 }
 
-export interface IGroup {
+export interface IHotelGroup {
   id: number;
   reviewCount: number;
-  grades: IGrade[];
+  grades: IHotelGrade[];
 }
 
-export interface IGrade {
+export interface IHotelGrade {
   id: string;
   score: number;
 }
@@ -688,7 +689,7 @@ export interface IGrade {
 export interface IAllGuest {
   id: number;
   reviewCount: number;
-  grades: IGrade[];
+  grades: IHotelGrade[];
 }
 
 export interface ITrendingScore {
@@ -698,7 +699,7 @@ export interface ITrendingScore {
 
 export interface IHotelContentReviewSummaries {
   snippets: ISnippet[];
-  recommendationScores: IRecommendationScores;
+  recommendationScores: IHotelRecommendationScores;
   positiveMentions: IPositiveMentions;
 }
 
@@ -711,7 +712,7 @@ export interface ISnippet {
   countryName: string;
 }
 
-export interface IRecommendationScores {
+export interface IHotelRecommendationScores {
   recommendationScore: number;
 }
 
@@ -726,7 +727,7 @@ export interface IHotelContentEngagement {
 
 export interface IHotelContentHighlights {
   locationHighlights: ILocationHighlight[];
-  favoriteFeatures: IFavoriteFeature[];
+  favoriteFeatures: IHotelFeature[];
 }
 
 export interface ILocationHighlight {
@@ -734,7 +735,7 @@ export interface ILocationHighlight {
   highlightType: string;
 }
 
-export interface IFavoriteFeature {
+export interface IHotelFeature {
   id: number;
   name: string;
   symbol: string;
@@ -764,7 +765,7 @@ export interface IFeature {
 
 export interface IImage {
   caption: string;
-  urls: IUrl[];
+  urls: IHotelUrl[];
 }
 
 export interface IHotelFacility {
@@ -877,21 +878,21 @@ export interface IRestaurantOnSite {
 }
 
 export interface IHotelContentSummary {
-  accommodation: IAccommodation;
+  accommodation: IHotelAccommodation;
   agodaGuaranteeProgram: boolean;
   hasHostExperience: boolean;
   localeName: string;
   defaultName: string;
   propertyType: string;
   propertyLinks: ISearchHotelPropertyLinks;
-  geoInfo: IGeoInfo;
-  address: IAddress;
-  spokenLanguages: ISpokenLanguage[];
-  nhaSummary: INhaSummary;
+  geoInfo: IHotelGeoInfo;
+  address: IHotelAddress;
+  spokenLanguages: IHotelContentSpokenLanguage[];
+  nhaSummary: IHotelNhaSummary;
   rating: number;
 }
 
-export interface IAccommodation {
+export interface IHotelAccommodation {
   accommodationType: number;
   accommodationName: string;
 }
@@ -900,70 +901,70 @@ export interface ISearchHotelPropertyLinks {
   propertyPage: string;
 }
 
-export interface IGeoInfo {
+export interface IHotelGeoInfo {
   latitude: number;
   longitude: number;
   obfuscatedLat: number;
   obfuscatedLong: number;
 }
 
-export interface IAddress {
+export interface IHotelAddress {
   address1: string;
   address2: string;
   postalCode: string;
-  country: ICountry;
-  city: ICity;
-  area: IArea;
+  country: IHotelCountry;
+  city: IHotelCity;
+  area: IHotelArea;
 }
 
-export interface ICountry {
+export interface IHotelCountry {
   id: number;
   name: string;
 }
 
-export interface ICity {
+export interface IHotelCity {
   id: number;
   name: string;
 }
 
-export interface IArea {
+export interface IHotelArea {
   name: string;
 }
 
-export interface ISpokenLanguage {
+export interface IHotelContentSpokenLanguage {
   id: number;
 }
 
-export interface INhaSummary {
+export interface IHotelNhaSummary {
   isRareFind: any;
   supportedLongStay: any;
 }
 
 export interface IHotelContentLocalInformation {
-  nearbyPlaces: INearbyPlace[];
-  topPlaces: ITopPlace[];
-  nearbyProperties: INearbyProperty[];
-  walkablePlaces: IWalkablePlaces;
-  nearbyShops: INearbyShop[];
+  nearbyPlaces: IHotelNearbyPlace[];
+  topPlaces: IHotelTopPlace[];
+  nearbyProperties: IHotelNearbyProperty[];
+  walkablePlaces: IHotelWalkablePlaces;
+  nearbyShops: IHotelNearbyShop[];
 }
 
-export interface INearbyPlace {
+export interface IHotelNearbyPlace {
   name: string;
   distanceInKm: number;
-  geoInfo: IGeoInfo;
+  geoInfo: IHotelGeoInfo;
   typeId: number;
   typeName: string;
 }
 
-export interface ITopPlace {
+export interface IHotelTopPlace {
   name: string;
   distanceInKm: number;
-  geoInfo: IGeoInfo;
+  geoInfo: IHotelGeoInfo;
   typeId: number;
   typeName: string;
 }
 
-export interface INearbyProperty {
+export interface IHotelNearbyProperty {
   categoryName: string;
   categorySymbol: string;
   places: IPlace[];
@@ -974,46 +975,46 @@ export interface IPlace {
   distanceInKm: number;
   duration: any;
   durationIcon: any;
-  geoInfo: IGeoInfo;
+  geoInfo: IHotelGeoInfo;
 }
 
-export interface IWalkablePlaces {
+export interface IHotelWalkablePlaces {
   title: string;
   description: string;
   totalCount: number;
-  walkableCategories: IWalkableCategory[];
+  walkableCategories: IHotelWalkableCategory[];
 }
 
-export interface IWalkableCategory {
+export interface IHotelWalkableCategory {
   categoryName: string;
   totalCount: number;
-  topPlaces: ITopPlace[];
+  topPlaces: IHotelTopPlace[];
 }
 
-export interface INearbyShop {
+export interface IHotelNearbyShop {
   name: string;
   typeId: number;
   distanceInKm: number;
-  geoInfo: IGeoInfo;
+  geoInfo: IHotelGeoInfo;
 }
 
 export interface IHotelContentExperiences {
-  experience: IExperience[];
+  experience: IHotelExperience[];
 }
 
-export interface IExperience {
+export interface IHotelExperience {
   symbol: string;
-  landmarks: ILandmark[];
+  landmarks: IHotelLandmark[];
 }
 
-export interface ILandmark {
+export interface IHotelLandmark {
   name: string;
-  geoInfo: IGeoInfo;
+  geoInfo: IHotelGeoInfo;
   scores: any;
   distanceInKm: number;
 }
 
-export interface IMetaLab {
+export interface IHotelMetaLab {
   propertyAttributes: ISearchHotelPropertyAttribute[];
 }
 
@@ -1027,7 +1028,7 @@ export interface ISearchHotelPropertyAttribute {
 export interface IHotelReviewResponse {
   comments: IHotelReviewComment[];
   errors: any[];
-  resultStatus: IHotelReviewResultStatus;
+  resultStatus: IHotelResultStatus;
   serverTime: string;
   serverName: string;
   processTime: any;
@@ -1072,11 +1073,277 @@ export interface IHotelReviewCommentRating {
   scoreText: string;
 }
 
-export interface IHotelReviewResultStatus {
+export interface IHotelResultStatus {
   category: number;
   serverStatus: number;
   message: string;
   serverMessage: string;
   severity: number;
   isSuccess: boolean;
+}
+
+// ======= Room price ===========
+
+export interface IRoomPriceResponse {
+  resultStatus: IHotelResultStatus;
+  serverTime: string;
+  serverName: string;
+  debugLogs: any[];
+  roomGroups: IHotelRoomGroup[];
+  refreshComplete: boolean;
+  roomFilters: any[];
+  benefitOrders: number[];
+  cheapestRoomTokens: string[];
+  roomBundles: any[];
+  jtbRatePlanExist: boolean;
+  searchToken: string;
+  searchId: string;
+  enableChildWidget: boolean;
+  searchInfo: ISearchHotelInfo;
+  eligibleWalletPromotions: any[];
+  isEligibleForBasket: boolean;
+}
+export interface IHotelRoomGroup {
+  masterRoomTypeId: number;
+  masterRoomTypeName: string;
+  masterRoomTypeAlternateName: string;
+  masterRoomTypeEnglishName: string;
+  cheapestRoomToken: string;
+  cheapestRoomTokens: string[];
+  rooms: IHotelRoomItem[];
+  bedType: string;
+  roomSize: number;
+  sizeInfo: IHotelRoomGroupSizeInfo;
+  facilities: number[];
+  occupancyInfo: IHotelRoomOccupancyInfo;
+  features: IHotelFeature[];
+  images: IHotelImage[];
+  suitableFor: any[];
+  allowChildren: boolean;
+  isRecommended: boolean;
+}
+
+export interface IHotelRoomItem {
+  roomToken: string;
+  uid: string;
+  pc: IHotelRoomPc;
+  cashback: IHotelRoomCashback;
+  breakfastIncluded: boolean;
+  benefits: IHotelRoomBenefit[];
+  badgeType: number;
+  badges: any[];
+  roomOccupancyDescription: string;
+  remainRoom: number;
+  roomInfoComponent: IHotelRoomInfoComponent[];
+  providerText: IHotelRoomProviderText;
+  cancellationPolicyType: number;
+  currentCancellationPolicyType: number;
+  cancellationPolicyTitle: string;
+  cancellationPolicyTitleTemplate: IHotelRoomInfoTemplate;
+  cancellationPolicy: string;
+  cancellationInfo: IHotelRoomCancellationInfo;
+  isBnpl: boolean;
+  isAgency: boolean;
+  isMultiHotelEligible: boolean;
+  isPromoCodeEligible: boolean;
+  isVipDiscountEligible: boolean;
+  isFullyChargeAtAgoda: boolean;
+  isCreditCardRequired: boolean;
+  isApplePayAvailable: boolean;
+  isImportantInformationTextRequired: boolean;
+  masterRoomTypeId: number;
+  roomName: string;
+  englishRoomName: string;
+  roomView: string;
+  roomSize: number;
+  isPromotionEligible: boolean;
+  promotionDiscount: IRoomPromotionDiscount;
+  maxRoomOccupancy: number;
+  isExtrabedAvaiable: boolean;
+  hasSurcharge: boolean;
+  minimumFitRooms: number;
+  numberOfGuestsWithoutRoom: number;
+  isBOR: boolean;
+  occupancyInfo: IHotelRoomOccupancyInfo;
+  hasBookingFee: boolean;
+  paymentInfo: IHotelRoomPaymentInfo;
+  suggestedRoomQuantity: number;
+  discountMessages: any[];
+  isFreeChildrenSuggestionEligible: boolean;
+  channelId: number;
+  stackedChannels: IHotelRoomStackedChannels;
+  isEasyCancel: boolean;
+  roomIdentifiers: string;
+  rareFindType: number;
+  roomOfferNameType: string;
+  hasAnyBreakfastRelatedBenefits: boolean;
+  isTaiwanCampaignEligible: boolean;
+  isGoLocalEligible: boolean;
+  cartEligible: boolean;
+  pricingDisplaySummary: IHotelRoomPricingDisplaySummary;
+  isCartRestricted: boolean;
+  allowMultipleBooking: boolean;
+  papiRoomIdentifier: string;
+  roomTypeId: number;
+  bfUrl: string;
+  roomOccupancy: number;
+  cancellationPolicyCode: string;
+  rateplanID: number;
+  promotionID: number;
+  roomNumAdult: number;
+  roomNumChild: number;
+  roomDMCId: string;
+  rateCategory: IHotelRoomRateCategory;
+  price: number;
+  pricePerNight: number;
+  priceType: number;
+  crossedPrice: number;
+  isInclusive: boolean;
+  promotionType: number;
+  promotionSavings: number;
+  maxChildren: number;
+  lastBookedTimeStamp: string;
+  HasSummaryData: boolean;
+  hasTaxPerPerson: boolean;
+  isRequiredAddress: boolean;
+}
+
+export interface IHotelRoomPc {
+  a: number;
+  i: string;
+  e: string;
+  t: number;
+  s: number;
+  cor: number;
+  ccor: number;
+  tf: number;
+  tfPRPN: number;
+  promotionPricePeek: number;
+  originalTotal: number;
+  pseudoCoupon: number;
+  priceFreezePrice: IHotelPriceBase;
+}
+
+export interface IHotelRoomCashback {
+  total: IHotelAmountBase;
+  extraBedAmount: IHotelAmountBase;
+  totalAfterCashback: IHotelAmountBase;
+  showPostCashbackPrice: boolean;
+  earnId: number;
+  expiryDay: number;
+  dayToEarn: number;
+  percent: number;
+  cashbackType: string;
+  tcUrl: string;
+  cashbackVersion: string;
+}
+
+export interface IHotelRoomBenefit {
+  id: number;
+  displayText: string;
+  available: boolean;
+  targetType: string;
+  benefitValue: number;
+  labels: any[];
+}
+
+export interface IHotelRoomInfoComponent {
+  title: string;
+  subSectionComponents: IHotelRoomSubSectionComponent[];
+  sectionType: number;
+  type: number;
+}
+
+export interface IHotelRoomSubSectionComponent {
+  subTitle?: string;
+  des: string;
+  icontype: number;
+}
+
+export interface IHotelRoomProviderText {
+  room: IHotelBaseText;
+  payment: IHotelBaseText;
+}
+
+export interface IHotelRoomCancellationInfo {
+  type: number;
+  currentType: number;
+  freeCancellationDate: string;
+  titleTemplate: IHotelRoomInfoTemplate;
+  descriptionTemplate: IHotelRoomInfoTemplate;
+  noShowPolicy: string;
+  policies: string[];
+  cancellationCode: string;
+}
+export interface IHotelRoomInfoTemplate {
+  template: string;
+  arguments: ITemplateArgument[];
+}
+export interface ITemplateArgument {
+  id: string;
+  type: number;
+  value: string;
+}
+
+export interface IRoomPromotionDiscount {
+  typeId: number;
+  v: number;
+  u: number;
+  id: number;
+}
+
+export interface IHotelRoomOccupancyInfo {
+  maxOccupancy: number;
+  extraBed: number;
+  maxFreeChildren: number;
+  perOfferFreeChildrenAndInfants: number;
+  maxAdults: number;
+  maxChildren: number;
+  noOfFreeChildren: number;
+  noOfChildrenWithChildRate: number;
+}
+
+export interface IHotelRoomPaymentInfo {
+  isPrepay: boolean;
+  paymentModel: number;
+}
+
+export interface IHotelRoomStackedChannels {
+  id: number;
+  channelBreakDowns: any[];
+}
+
+export interface IHotelRoomPricingDisplaySummary {
+  perBook: IHotelRoomPricePer;
+  perRoomPerBook: IHotelRoomPricePer;
+  perRoomPerNight: IHotelRoomPricePer;
+  perNight: IHotelRoomPricePer;
+}
+
+export interface IHotelRoomPricePer {
+  chargeTotal: IHotelPriceBase;
+  rebateTotal: IHotelPriceBase;
+  rebateExtraBed: IHotelPriceBase;
+  displayTotal: IHotelPriceBase;
+  pseudoCoupon: IHotelPriceBase;
+  originalTotal: IHotelPriceBase;
+  crossedOut: IHotelPriceBase;
+  payToAgoda: IHotelPriceBase;
+  payAtHotel: IHotelPriceBase;
+  ignoreDownliftAmount: IHotelPriceBase;
+  autoAppliedPromoDiscount: any;
+}
+
+export interface IHotelRoomRateCategory {
+  id: number;
+  stayPackageType: number;
+  checkIn: any;
+  checkOut: any;
+  isChildRateEnabled: boolean;
+}
+
+export interface IHotelRoomGroupSizeInfo {
+  size: number;
+  unit: string;
+  fullDescription: string;
 }

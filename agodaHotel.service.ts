@@ -5,12 +5,14 @@ import {
   HotelAutoCompleteRequestType,
   HotelDetailRequestType,
   HotelReviewRequestType,
+  HotelRoomPriceRequestType,
   HotelSearchOvernightRequestType,
 } from "./agodaHotel.type";
 import {
   IHotelDetailResponse,
   IHotelReviewResponse,
   IHotelsAutoCompleteResponse,
+  IRoomPriceResponse,
   ISearchHotelResponse,
 } from "./agodaHotel.interface";
 
@@ -89,6 +91,19 @@ export class AgodaHotelService {
       >("hotels/reviews", {
         params,
       })
+    )?.data;
+  }
+
+  async getHotelRoomPrice(
+    params: HotelRoomPriceRequestType
+  ): Promise<IBaseResponse<IRoomPriceResponse>> {
+    return (
+      await this.#_axiosInstance.get<IBaseResponse<IRoomPriceResponse>>(
+        "hotels/room-prices",
+        {
+          params,
+        }
+      )
     )?.data;
   }
 }
