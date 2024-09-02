@@ -88,7 +88,7 @@ export class AgodaHotelService {
   ): Promise<IBaseResponse<IHotelDetailOtherResponse>> {
     return (
       await this.#_axiosInstance.get<IBaseResponse<IHotelDetailOtherResponse>>(
-        "hotels/detail-others",
+        "hotels/details-others",
         {
           params: this.parseParamSearchOvernight(params),
         }
