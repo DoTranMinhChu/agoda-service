@@ -1321,19 +1321,22 @@ export interface IHotelRoomPricingDisplaySummary {
 }
 
 export interface IHotelRoomPricePer {
-  chargeTotal: IHotelPriceBase;
-  rebateTotal: IHotelPriceBase;
-  rebateExtraBed: IHotelPriceBase;
-  displayTotal: IHotelPriceBase;
-  pseudoCoupon: IHotelPriceBase;
-  originalTotal: IHotelPriceBase;
-  crossedOut: IHotelPriceBase;
-  payToAgoda: IHotelPriceBase;
-  payAtHotel: IHotelPriceBase;
-  ignoreDownliftAmount: IHotelPriceBase;
+  chargeTotal: IHotelRoomPricePerDetail;
+  rebateTotal: IHotelRoomPricePerDetail;
+  rebateExtraBed: IHotelRoomPricePerDetail;
+  displayTotal: IHotelRoomPricePerDetail;
+  pseudoCoupon: IHotelRoomPricePerDetail;
+  originalTotal: IHotelRoomPricePerDetail;
+  crossedOut: IHotelRoomPricePerDetail;
+  payToAgoda: IHotelRoomPricePerDetail;
+  payAtHotel: IHotelRoomPricePerDetail;
+  ignoreDownliftAmount: IHotelRoomPricePerDetail;
   autoAppliedPromoDiscount: any;
 }
-
+export interface IHotelRoomPricePerDetail {
+  exclusive: number;
+  allInclusive: number;
+}
 export interface IHotelRoomRateCategory {
   id: number;
   stayPackageType: number;
