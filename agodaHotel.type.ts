@@ -300,6 +300,62 @@ export type HotelReviewRequestType = {
    */
   currency?: string;
 };
+//==== Hotel Detail Other ===
+export type HotelDetailOtherRequestType = {
+  /**
+   * Required: true
+   * propertyId can be retrieved from /hotels/search (data->properties->propertyId)
+   * Ex: 9062231
+   */
+  propertyId: string;
+
+  /**
+   * Check-in date
+   * Required: true
+   * Format: YYYY-MM-DD
+   * Ex: 2024-05-25
+   */
+  checkinDate: Date;
+
+  /**
+   * Check-in date
+   * Required: true
+   * Format: YYYY-MM-DD
+   * Ex: 2024-05-25
+   */
+  checkoutDate: Date;
+
+  /**
+   * language can be retrieved from /languages (data->Code) Ex: en-us Default: en-us
+   */
+  language?: string;
+
+  /**
+   * currency can be retrieved from /currencies (data->Code) Ex: EUR Default: USD
+   */
+  currency?: string;
+
+  /**
+   * Room
+   * Ex: 2
+   * Default: 1
+   */
+  room?: number;
+
+  /**
+   * Ages 18 or above
+   * Ex: 2
+   * Default: 1
+   */
+  adult?: number;
+
+  /**
+   * Child ages list: Ages 0-17
+   * It can input multiple values, and the values should be separated by commas
+   * Ex: 0,12,13,17
+   */
+  childAges?: number;
+};
 
 //==== Hotel Room Prices ===
 export type HotelRoomPriceRequestType = {

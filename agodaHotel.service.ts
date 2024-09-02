@@ -3,12 +3,14 @@ import { axiosInstance } from "./axiosBase";
 import { AgodaServiceConfig, IBaseResponse } from "./agoda.type";
 import {
   HotelAutoCompleteRequestType,
+  HotelDetailOtherRequestType,
   HotelDetailRequestType,
   HotelReviewRequestType,
   HotelRoomPriceRequestType,
   HotelSearchOvernightRequestType,
 } from "./agodaHotel.type";
 import {
+  IHotelDetailOtherResponse,
   IHotelDetailResponse,
   IHotelReviewResponse,
   IHotelsAutoCompleteResponse,
@@ -35,7 +37,7 @@ export class AgodaHotelService {
       await this.#_axiosInstance.get<
         IBaseResponse<Array<IHotelsAutoCompleteResponse>>
       >("hotels/auto-complete", {
-        params,
+        params: this.parseParamSearchOvernight(params),
       })
     )?.data;
   }
@@ -77,11 +79,22 @@ export class AgodaHotelService {
       await this.#_axiosInstance.get<
         IBaseResponse<Array<IHotelDetailResponse>>
       >("hotels/details", {
-        params,
+        params: this.parseParamSearchOvernight(params),
       })
     )?.data;
   }
-
+  async getHotelDetailOther(
+    params: HotelDetailOtherRequestType
+  ): Promise<IBaseResponse<IHotelDetailOtherResponse>> {
+    return (
+      await this.#_axiosInstance.get<IBaseResponse<IHotelDetailOtherResponse>>(
+        "hotels/detail-others",
+        {
+          params: this.parseParamSearchOvernight(params),
+        }
+      )
+    )?.data;
+  }
   async getHotelReviews(
     params: HotelReviewRequestType
   ): Promise<IBaseResponse<Array<IHotelReviewResponse>>> {

@@ -1350,3 +1350,155 @@ export interface IHotelRoomGroupSizeInfo {
   unit: string;
   fullDescription: string;
 }
+
+//===== Hotel Detail Other =======
+
+export interface IHotelDetailOtherResponse {
+  type: string;
+  name: string;
+  children: IHotelDetailOtherChildren[];
+  screens: any[];
+}
+
+export interface IHotelDetailOtherChildren {
+  type: string;
+  property: IHotelDetailOtherChildrenProperty;
+  pois: IHotelDetailOtherChildrenPoi[];
+  isSelectRoomAvailable: boolean;
+  viewMode: string;
+  child: IHotelDetailOtherChild;
+}
+export interface IHotelDetailOtherChildrenProperty {
+  id: number;
+  name: string;
+  imageUrl: string;
+  latitude: number;
+  longitude: number;
+  cityId: number;
+  countryId: number;
+  priceAmount: number;
+  priceCrossOut: number;
+  cashbackVersion: string;
+  isLocationHidden: boolean;
+  isSingleRoomNha: boolean;
+  isSoldOut: boolean;
+  bookingDuration: IHotelDetailOtherChildrenPropertyBookingDuration;
+  shouldShowAgodaHomesBadge: boolean;
+  distanceDescription: string;
+  review: IHotelDetailOtherChildrenPropertyReview;
+  rating: IHotelDetailOtherChildrenPropertyRating;
+  propertyType: string;
+}
+export interface IHotelDetailOtherChildrenPropertyBookingDuration {
+  type: string;
+  duration: number;
+}
+
+export interface IHotelDetailOtherChildrenPropertyReview {
+  score: number;
+  quote: string;
+  count: number;
+}
+
+export interface IHotelDetailOtherChildrenPropertyRating {
+  rating: number;
+  shape: string;
+  style: string;
+}
+
+export interface IHotelDetailOtherChildrenPoi {
+  latitude: number;
+  longitude: number;
+  name: string;
+  distance: number;
+  type: string;
+  filterType: string;
+}
+
+export interface IHotelDetailOtherChild {
+  type: string;
+  header: IHotelDetailOtherChildHeader;
+  headerIsOverlay: boolean;
+  content: IHotelDetailOtherChildContent;
+  footer: IHotelDetailOtherChildFooter;
+  onPageLoaded: any;
+}
+
+export interface IHotelDetailOtherChildHeader {
+  type: string;
+  isTransparent: boolean;
+  backVariant: string;
+  content: IHotelDetailOtherChildHeaderContent;
+  trailingItems: IHotelDetailOtherTrailingItem[];
+}
+
+export interface IHotelDetailOtherChildHeaderContent {
+  type: string;
+  title: string;
+  subtitle: string;
+  icon: string;
+  analytics: IHotelDetailOtherAnalytics;
+  onClick: IHotelDetailOtherOnClick;
+}
+
+export interface IHotelDetailOtherOnClick {
+  type: string;
+}
+export interface IHotelDetailOtherAnalytics {
+  elementName: string;
+  version: number;
+  context: any;
+  actions: string[];
+}
+
+export interface IHotelDetailOtherChildContent {
+  type: string;
+  isRootList: boolean;
+
+  spacing?: string;
+  alignment?: string;
+
+  contentSlotVariant?: string;
+  title?: string;
+  content?: IHotelDetailOtherChildContent;
+  analytics?: IHotelDetailOtherAnalytics;
+  variant?: string;
+  action?: IHotelDetailOtherChildHeaderContent;
+  verticalPadding?: string;
+  horizontalPadding?: string;
+  color?: string;
+  widthType?: string;
+
+  children: IHotelDetailOtherChildContent[];
+
+  filterGroupId?: string;
+  initialSelectedFilters?: string[];
+
+  icon?: string;
+  body?: string;
+
+  value?: string;
+  maxLines?: number;
+
+  columns?: number;
+  space?: string;
+}
+
+export interface IHotelDetailOtherTrailingItem {
+  type: string;
+  propertyId?: number;
+  icon?: string;
+  selectedIcon?: string;
+  shouldHighlight: boolean;
+  analytics: IHotelDetailOtherAnalytics;
+  onClick?: IHotelDetailOtherOnClick;
+}
+
+export interface IHotelDetailOtherChildFooter {
+  type: string;
+  verticalPadding: string;
+  horizontalPadding: string;
+  color: string;
+  widthType: string;
+  content: IHotelDetailOtherChildContent;
+}
