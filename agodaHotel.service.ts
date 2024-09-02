@@ -52,7 +52,7 @@ export class AgodaHotelService {
       )
     )?.data;
   }
-  private parseParamSearchOvernight(_params: HotelSearchOvernightRequestType) {
+  private parseParamSearchOvernight(_params: any) {
     const params: { [key: string]: Array<number> | string | number | Date } =
       {};
     for (const [key, value] of Object.entries(_params)) {
@@ -89,7 +89,7 @@ export class AgodaHotelService {
       await this.#_axiosInstance.get<
         IBaseResponse<Array<IHotelReviewResponse>>
       >("hotels/reviews", {
-        params,
+        params: this.parseParamSearchOvernight(params),
       })
     )?.data;
   }
@@ -101,7 +101,7 @@ export class AgodaHotelService {
       await this.#_axiosInstance.get<IBaseResponse<IRoomPriceResponse>>(
         "hotels/room-prices",
         {
-          params,
+          params: this.parseParamSearchOvernight(params),
         }
       )
     )?.data;
